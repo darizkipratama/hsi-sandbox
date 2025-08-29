@@ -2,35 +2,22 @@ package main
 
 import "fmt"
 
+// menghitung luas lingkaran dan mengembalikan hasilnya
+func hitungLuasLingkaran(jariJari float32) float32 {
+	const phi float32 = 3.14
+	return phi * jariJari * jariJari
+}
+
+// mencetak hasil perhitungan luas lingkaran
+func cetakHasilPerhitungan(hasilHitung float32) {
+	fmt.Printf("luas Lingkaran 3.2f", hasilHitung)
+}
+
 func main() {
-    // Basic syntax and data types in Go
+	var jariJari float32 = 7.0
+	LuasLingkaran := hitungLuasLingkaran(jariJari)
+	cetakHasilPerhitungan(LuasLingkaran)
 
-    // Variables
-    var name string = "John Doe"
-    var age int = 30
-    var height float64 = 5.9
-    var isStudent bool = false
-
-    // Print variables
-    fmt.Println("Name:", name)
-    fmt.Println("Age:", age)
-    fmt.Println("Height:", height)
-    fmt.Println("Is Student:", isStudent)
-
-    // Constants
-    const pi = 3.14
-    fmt.Println("Value of Pi:", pi)
-
-    // Basic control structure: if-else
-    if age < 18 {
-        fmt.Println(name, "is a minor.")
-    } else {
-        fmt.Println(name, "is an adult.")
-    }
-
-    // Basic control structure: for loop
-    fmt.Println("Counting to 5:")
-    for i := 1; i <= 5; i++ {
-        fmt.Println(i)
-    }
+	var jariJari2 float32 = 10.0
+	var jariJari3 float32 = 14.0
 }

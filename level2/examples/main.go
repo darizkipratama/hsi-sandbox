@@ -39,4 +39,11 @@ func main() {
 	} else {
 		fmt.Println("Result of 10 / 0 =", result)
 	}
+
+	hasil, sisa, err := kalkulasiPembagian(10, 6)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Printf("Hasil pembagian 10 / 6 = %d, sisa = %d\n", hasil, sisa)
+	}
 }

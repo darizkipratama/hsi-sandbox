@@ -1,41 +1,80 @@
 package main
 
-import (
-    "fmt"
-)
+import "fmt"
 
-// Shape interface
-type Shape interface {
-    Area() float64
+// Mendefiniskan Interface/Kontrak/Method Yang Harus Dimiliki oleh Struct
+// Konsep Interface itu adalah Polimorphism
+type FormPendaftaranInterface interface {
+	ValidasiUsia(usia int) bool
+	ValidasiGender(gender string) bool
 }
 
-// Rectangle struct
-type Rectangle struct {
-    Width  float64
-    Height float64
+type FormPendaftaran struct {
+	NamaLengkap string
+	Email       string
+	Gender      string
+	Usia        int
 }
 
-// Circle struct
-type Circle struct {
-    Radius float64
+type FormPendaftaranUsiaSenja struct {
+	NamaLengkap    string
+	Email          string
+	Gender         string
+	Usia           int
+	PenyakitBawaan string
 }
 
-// Area method for Rectangle
-func (r Rectangle) Area() float64 {
-    return r.Width * r.Height
+//Implementasi Untuk Struct Reguler
+func (f FormPendaftaran) ValidasiUsia(usia int) bool {
+	if usia < 15 || usia > 75 {
+		return false
+	}
+	return true
 }
 
-// Area method for Circle
-func (c Circle) Area() float64 {
-    return 3.14 * c.Radius * c.Radius
+func (f FormPendaftaran) ValidasiGender(gender string) bool {
+	if gender != "Laki-laki" && gender != "Perempuan" {
+		return false
+	}
+	return true
+}
+
+// Implementasi Untuk Struct Usia Senja
+func (f FormPendaftaranUsiaSenja) ValidasiUsia(usia int) bool {
+	if usia > 75 {
+		return true
+	}
+	return false
+}
+
+func (f FormPendaftaranUsiaSenja) ValidasiGender(gender string) bool {
+	if gender != "Laki-laki" && gender != "Perempuan" {
+		return false
+	}
+	return true
+}
+
+func ValidasiUsiaForm(formInt FormPendaftaranInterface, usia int) bool {
+	return formInt.ValidasiUsia(usia)
 }
 
 func main() {
-    // Create instances of Rectangle and Circle
-    rect := Rectangle{Width: 10, Height: 5}
-    circle := Circle{Radius: 7}
+	pendaftaran1 := FormPendaftaran{
+		NamaLengkap: "Budi Santoso",
+		Email:       "email@email.com",
+		Usia:        35,
+	}
 
-    // Print the area of each shape
-    fmt.Printf("Area of Rectangle: %.2f\n", rect.Area())
-    fmt.Printf("Area of Circle: %.2f\n", circle.Area())
+	pendaftaran2 := FormPendaftaranUsiaSenja{
+		NamaLengkap:    "Abu Fulan",
+		Email:          "Fulan@email.com",
+		Usia:           80,
+		PenyakitBawaan: "Diabetes",
+	}
+
+	apakahUsiaValid1 := ValidasiUsiaForm(pendaftaran1, pendaftaran1.Usia)
+	fmt.Println("Apakah usia valid?", apakahUsiaValid1)
+
+	apakahUsiaValid2 := ValidasiUsiaForm(pendaftaran2, pendaftaran2.Usia)
+	fmt.Println("Apakah usia Senja valid?", apakahUsiaValid2)
 }
